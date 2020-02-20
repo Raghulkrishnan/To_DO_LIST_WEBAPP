@@ -41,7 +41,7 @@ $('#add_activity_btn').click(function(){
             'activityStatus' : $('input[name=status]:checked').val(),
             'activityPriority' : activity_hp
         };
-
+        console.log(activityDetails); // doing this to try out git push
         AddActivity(activityDetails, function(ret){
             // save form to default
             if(ret != -1){
