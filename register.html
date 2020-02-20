@@ -1,0 +1,100 @@
+<html>
+	<head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    	<link href="images/calendar.png" rel="shortcut icon" type="image/x-icon" />
+ 		<title>Daily Planner</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+ 		<link href="css/bootstrap/bootstrap-material-datetimepicker.css" rel="stylesheet">
+ 		<link href="css/bootstrap/bootstrap-material-datetimepicker.css" rel="stylesheet">
+
+ 		<link href="css/material/font-awesome.min.css" rel="stylesheet">
+ 		<!-- font awesome external link working -->
+ 		 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ 		<link href="css/material/adminbsb.css" rel="stylesheet">
+ 		<link href="css/notif/notifit.css" rel="stylesheet">
+ 		<!-- add style.css in the end! -->
+ 		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body class="bg_app_image">
+		<div class="container login_box">
+			<div class="logo" id="">
+				 <img src="images/calendar.png" alt="logo" id="" />
+			</div>
+			<div class="content">
+		        <span>Login to view your daily activities!</span>
+		    </div>
+		    <div class="row">
+		    	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+		        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+		            <ul class="activitiy_info_box list-group m-t-40">
+		                <li class="list-group-item">
+		            	 	<form>
+								<div class="form-group">
+								    <label>First Name*</label>
+								    <input type="text" class="form-control" id="register_firstName">
+								</div>
+							</form>
+		                </li>
+		                <li class="list-group-item">
+		                	<form>
+								<div class="form-group">
+								    <label>Last Name* </label>
+								    <input type="text" class="form-control" id="register_lastName">
+							</form>
+		                </li>
+		                <li class="list-group-item">
+		                	<form>
+								<div class="form-group">
+								    <label>Username* </label>
+								    <input type="text" class="form-control" id="register_mail">
+							</form>
+		                </li>
+		                <li class="list-group-item">
+		                	<form>
+								<div class="form-group">
+								    <label>Password* </label>
+								    <input type="password" class="form-control" id="register_pwd">
+								    <span class="pull-right align-input-icon select-icon-width" onclick="ShowHidePassword('register_pwd', 'login_pwd_toggle1');">
+	                                <i class="fa fa-eye" id="login_pwd_toggle1"></i></span>
+							</form>
+		                </li>
+		                <li class="list-group-item">
+		                	<form>
+								<div class="form-group">
+								    <label>Confirm Password* </label>
+								    <input type="password" class="form-control" id="register_confirmPwd">
+								    <span class="pull-right align-input-icon select-icon-width" onclick="ShowHidePassword('register_confirmPwd', 'login_pwd_toggle2');">
+	                                <i class="fa fa-eye" id="login_pwd_toggle2"></i></span>
+							</form>
+		                </li>
+
+		                <li class="list-group-item">
+		                	<div class="panel-footer" id="activity_edit_footer">
+		                        <div class="row">
+		                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+		                                <button type="button" class="btn btn-block btn-sm btn-success white" id="reg_btn_login">
+		                        		<i class="fa fa-sign-in"></i><span> Go back! Login</span></button>
+		                            </div>
+		                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+		                                <button type="button" class="btn btn-block btn-sm btn-primary white" id="login_btn_register" onclick='Register()'>
+		                        		<i class="fa fa-user-plus"></i><span></span>  Sign Up!</span></button>
+		                            </div>
+		                    </div>
+		                </li>
+		            </ul>
+		        </div>
+		        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+		    </div>
+		</div>
+	</body>
+	<!-- linking js files -->
+    <!-- alert -->
+    <script src="js/notifit.js" type="text/javascript"></script>
+	<!-- rest.js -->
+	<script src="js/rest.js" type="text/javascript"></script>
+	<!-- register.js -->
+	<script src="js/register.js" type="text/javascript"></script>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="images/calendar.png" rel="shortcut icon" type="image/x-icon" />
+        <title>Daily Planner</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <link href="css/material/font-awesome.min.css" rel="stylesheet">
+        <!-- font awesome external link working -->
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="css/material/adminbsb.css" rel="stylesheet">
+        <link href="css/notif/notifit.css" rel="stylesheet">
+        <!-- add style.css in the end! -->
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body class="home_body">
+        <!-- home navigation bar -->
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <span class="navbar-brand">DAILY PLANNER </span>
+                    <span class="navbar-brand"> | </span>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active" onclick="window.location ='home.html' "><a href="">ACTIVITY LIST</a></li>
+                    <li><a href="" data-toggle="modal" data-target="#addActivityModal">ADD ACTIVITY</a></li>
+                    <li onclick="EditProfile();"><a href="" data-toggle="modal" data-target="">PROFILE</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                  <li onclick="return Logout();"><a href=""><span class="glyphicon glyphicon-log-in"></span> LOGOUT</a></li>
+                </ul>
+            </div>
+        </nav>
+<!-- body of home page with three columns-->
+<!-- first column - activity info box -->
+<!-- second column - activity list -->
+<!-- third column - showing one activity from list with option to edit -->
+        <div class="container">
+            <!-- <h3>Activity Info</h3> -->
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <ul class="activitiy_info_box list-group m-t-100">
+                        <li class="list-group-item">Total Activities <span id="total_act_count" class="badge">-</span></li>
+                        <li class="list-group-item">High Priority Activities <span id="total_hp_count" class="badge">-</span></li>
+                        <li class="list-group-item">Pending Activities <span id="pending_act_count" class="badge">-</span></li>
+                        <li class="list-group-item">Completed Activities <span id="completed_act_count" class="badge">-</span></li>
+                    </ul>
+                </div>
+
+                <!-- second column -->
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="panel-group activity_area m-t-100">
+                        <p><i class="fa fa-info"></i> Click on any activity below to view its details</p>
+                        <div class="panel panel-default" id="activity_list_area"></div>
+                    </div>
+                </div>
+                <!-- third column -->
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="panel-group activity_area m-t-100">
+                         <p><i class="fa fa-info"></i> Click on Edit Activity below to edit and click submit to save changes</p>
+                        <div class="panel panel-default" id="activity_edit_area">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a href="#collapse_edit" data-toggle="collapse">EDIT ACTIVITY</a>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse" id="collapse_edit">
+                                <div class="panel-body" id="activity_edit_body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label>Name: </label>
+                                            <input type="text" class="form-control" id="activity_edit_name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Description: </label>
+                                            <textarea class="form-control" id="activity_edit_description"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Status: </label>
+                                            <div class="m-l-20">
+                                                <input type="radio" name="upd_status" id="act_edit_pend" value="pending"> Pending<br>
+                                                <input type="radio" name="upd_status" id="act_edit_comp" value="completed"> Completed<br>
+                                                <input type="radio" name="upd_status" id="act_edit_rem" value="removed"> Removed
+                                            </div>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input id="highpriority_edit" type="checkbox"> High Priority</label>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="panel-footer" id="activity_edit_footer">
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                            <button type="button" id="update_activity_btn" class="btn btn-success">Update</button>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                            <button type="button" id="delete_activity_btn" class="btn btn-danger">Delete</button>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- add activity modal -->
+        <!-- Modal -->
+        <div id="addActivityModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+            <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add Activity</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/action_page.php">
+                            <div class="form-group">
+                                <label>Name: </label>
+                                <input type="text" class="form-control" id="activity_name">
+                            </div>
+                            <div class="form-group">
+                                <label>Description: </label>
+                                <textarea class="form-control" id="activity_description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Status: </label>
+                                <div class="m-l-20">
+                                    <input type="radio" name="status" id="act_pend" value="pending" checked="checked"> Pending<br>
+                                    <input type="radio" name="status" id="act_comp" value="completed"> Completed<br>
+                                    <input type="radio" name="status" id="act_rem" value="removed"> Removed
+                                </div>
+                            </div>
+                            <div class="checkbox">
+                                <label><input id="highpriority" type="checkbox"> High Priority</label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="add_activity_btn" class="btn btn-success" data-dismiss="modal">Add</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- edit user modal -->
+        <div id="editUserModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+            <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Edit User</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/action_page.php">
+                            <div class="form-group">
+                                <label>First Name: </label>
+                                <input type="text" class="form-control" id="user_first_name">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name: </label>
+                                <input type="text" class="form-control" id="user_last_name">
+                            </div>
+                            <div class="form-group">
+                                <label>User Name: </label>
+                                <input type="text" class="form-control" id="user_mail">
+                            </div>
+                            <div class="form-group">
+                                <label>Change Password: </label>
+                                <input type="text" class="form-control" id="user_password">
+                            </div>
+                            <div class="form-group">
+                                <label>Confirm Password: </label>
+                                <input type="text" class="form-control" id="user_confirm_password">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="edit_user_save_btn" class="btn btn-success" data-dismiss="modal">Save Changes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <!-- script -->
+    <!-- alert -->
+    <script src="js/notifit.js" type="text/javascript"></script>
+    <!-- rest.js -->
+    <script src="js/rest.js" type="text/javascript"></script>
+
+    <!-- home.js contains all the functionalities of the home page -->
+    <script src="js/home.js" type="text/javascript"></script>
+</html>

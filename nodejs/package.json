@@ -1,0 +1,25 @@
+{
+  "name": "mynode",
+  "version": "1.0.0",
+  "description": "final project server side setup",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "keywords": [
+    "node",
+    "require",
+    "const"
+  ],
+  "author": "Raghulkrishnan Balasubramanian",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.12",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.2",
+    "nodemon": "^2.0.0"
+  }
+}
